@@ -1,17 +1,27 @@
 import { Component } from '@angular/core';
+import {WidgetWrapperComponent} from "../widget-wrapper/widget-wrapper.component";
+import {VelocityWidgetComponent} from "../velocity-widget/velocity-widget.component";
+import {WeatherWidgetComponent} from "../weather-widget/weather-widget.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   template: `
-    <main class="container">
-      <h1>{{title}}</h1>
-      <div class="grid">
-        <div><button class="app-button" type="button">A Button</button></div>
-      </div>
-
-      <article class="black-background">An article</article>
-    </main>
+      <main class="container">
+          <h1>{{title}}</h1>
+          <article>
+              <app-widget-wrapper></app-widget-wrapper>
+          </article>
+          <article>
+            <app-velocity-widget></app-velocity-widget>
+          </article>
+          <article>
+            <app-weather-widget></app-weather-widget>
+          </article>
+              <!--
+                    <article class="black-background">An article</article>
+              -->
+      </main>
 
   `,
   styles: [
@@ -21,6 +31,11 @@ import { Component } from '@angular/core';
       }
     `
   ],
+  imports: [
+    WidgetWrapperComponent,
+    VelocityWidgetComponent,
+    WeatherWidgetComponent
+  ]
 })
 export class AppComponent {
   title = 'ngdemos-by-branch';
