@@ -11,7 +11,7 @@ import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from "@angular/for
       multi: true
     }
   ],
-  template: `<input [(ngModel)]="value"/>internal value: {{_internalValue}}`,
+  template: `<input [(ngModel)]="value" required minlength="4"/>internal value: {{_internalValue}}`,
   styles: [
     `
       .black-background {

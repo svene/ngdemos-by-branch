@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {CustomInputComponent} from "../custom-input/custom-input.component";
 import {FormsModule} from "@angular/forms";
+import {JsonPipe} from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,11 @@ import {FormsModule} from "@angular/forms";
     <main class="container">
       <h1>{{title}}</h1>
       <div class="grid">
-        <app-custom-input [(ngModel)]="external" name="externalVal"></app-custom-input>
+        <app-custom-input [(ngModel)]="external" name="externalVal" #validations="ngModel"></app-custom-input>
       </div>
       <div>external value: {{external}}</div>
 
-      <article class="black-background">An article</article>
+      <article class="black-background">{{validations.control | json}}</article>
     </main>
 
   `,
@@ -27,7 +28,8 @@ import {FormsModule} from "@angular/forms";
   imports: [
     AppComponent,
     CustomInputComponent,
-    FormsModule
+    FormsModule,
+    JsonPipe
   ]
 })
 export class AppComponent {
