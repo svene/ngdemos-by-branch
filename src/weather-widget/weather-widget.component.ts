@@ -1,5 +1,7 @@
 import {Component} from "@angular/core";
 import {NgIf} from "@angular/common";
+import {Widget} from "../widget-wrapper/widget.interface";
+import {WIDGET} from "../widget-wrapper/widget.token";
 
 @Component({
   selector: 'app-weather-widget',
@@ -18,12 +20,16 @@ import {NgIf} from "@angular/common";
   ],
   imports: [
     NgIf
-  ]
+  ],
+  providers: [{
+    provide: WIDGET,
+    useExisting: WeatherWidgetComponent,
+  }]
 })
-export class WeatherWidgetComponent {
+export class WeatherWidgetComponent implements Widget {
   isLoading = false;
 
-  loadData() {
+  load() {
     console.log('loading data from WEATHER API...');
   }
 
@@ -33,4 +39,5 @@ export class WeatherWidgetComponent {
       this.isLoading = false;
     }, 1000)
   }
+
 }

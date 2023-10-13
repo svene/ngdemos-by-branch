@@ -1,5 +1,7 @@
 import {Component} from "@angular/core";
 import {NgIf} from "@angular/common";
+import {Widget} from "../widget-wrapper/widget.interface";
+import {WIDGET} from "../widget-wrapper/widget.token";
 
 @Component({
   selector: 'app-velocity-widget',
@@ -19,9 +21,13 @@ import {NgIf} from "@angular/common";
   ],
   imports: [
     NgIf
-  ]
+  ],
+  providers: [{
+    provide: WIDGET,
+    useExisting: VelocityWidgetComponent,
+  }]
 })
-export class VelocityWidgetComponent {
+export class VelocityWidgetComponent implements Widget {
   isRefreshing = false;
 
   load() {

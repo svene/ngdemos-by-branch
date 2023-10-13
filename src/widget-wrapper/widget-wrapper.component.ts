@@ -1,5 +1,7 @@
 import {Component, OnInit, ContentChild } from "@angular/core";
 import {VelocityWidgetComponent} from "../velocity-widget/velocity-widget.component";
+import {WIDGET} from "./widget.token";
+import {Widget} from "./widget.interface";
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -21,10 +23,11 @@ import {VelocityWidgetComponent} from "../velocity-widget/velocity-widget.compon
 })
 export class WidgetWrapperComponent implements OnInit {
 
-  @ContentChild(VelocityWidgetComponent)
-  widget!: VelocityWidgetComponent;
+  @ContentChild(WIDGET)
+  widget!: Widget;
 
   ngOnInit(): void {
+    this.widget.load;
   }
 
   onRefresh() {

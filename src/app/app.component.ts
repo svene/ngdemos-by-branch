@@ -10,11 +10,9 @@ import {WeatherWidgetComponent} from "../weather-widget/weather-widget.component
       <main class="container">
           <h1>{{title}}</h1>
           <article>
-<!--
               <app-widget-wrapper>
                 <app-weather-widget></app-weather-widget>
               </app-widget-wrapper>
--->
           </article>
           <article>
             <app-widget-wrapper>
