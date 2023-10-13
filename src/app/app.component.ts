@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {CustomInputComponent} from "../custom-input/custom-input.component";
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,7 @@ import { Component } from '@angular/core';
     <main class="container">
       <h1>{{title}}</h1>
       <div class="grid">
-        <div><button class="app-button" type="button">A Button</button></div>
+        <app-custom-input></app-custom-input>
       </div>
 
       <article class="black-background">An article</article>
@@ -21,6 +22,10 @@ import { Component } from '@angular/core';
       }
     `
   ],
+  imports: [
+    AppComponent,
+    CustomInputComponent
+  ]
 })
 export class AppComponent {
   title = 'ngdemos-by-branch';
