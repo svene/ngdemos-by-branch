@@ -5,7 +5,11 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `
     <main class="container">
-      <h1>{{title}}</h1>
+      <div class="grid">
+        <h5>{{title}}</h5>
+        <div><a [href]="url" target="_blank"><img src="assets/svg/LogosYoutubeIcon.svg"></a></div>
+      </div>
+      <hr>
       <div class="grid">
         <div><button class="app-button" type="button">A Button</button></div>
       </div>
@@ -23,5 +27,6 @@ import { Component } from '@angular/core';
   ],
 })
 export class AppComponent {
-  title = 'ngdemos-by-branch';
+  title = 'Title of Demo';
+  url = 'https://angular.io/';
 }
