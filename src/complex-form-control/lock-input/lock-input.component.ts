@@ -9,7 +9,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
     <!-- See https://icones.js.org/collection/all -->
     <img
       src="{{value ? 'assets/svg/MaterialSymbolsLock.svg' : 'assets/svg/MaterialSymbolsLockOpenOutline.svg'}}"
-      (click)="value = !value" alt="">
+      (click)="setValue()" alt="">
   `,
   styles: [
     `
@@ -25,15 +25,21 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 })
 export class LockInputComponent implements ControlValueAccessor{
   value = false;
+  onChange!: (value: boolean) => void;
+
+  writeValue(obj: boolean): void {
+    this.value = obj;
+  }
 
   registerOnChange(fn: any): void {
+    this.onChange = fn;
   }
 
   registerOnTouched(fn: any): void {
   }
 
-  writeValue(obj: boolean): void {
-    console.log('writeValue: ' + obj);
-    this.value = obj;
+  setValue() {
+    this.value = !this.value;
+    this.onChange(this.value);
   }
 }
