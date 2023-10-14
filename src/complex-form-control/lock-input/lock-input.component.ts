@@ -5,11 +5,11 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
   selector: 'app-lock-input',
   standalone: true,
   template: `
-      <small>Should be locked:</small>
-      <!-- See https://icones.js.org/collection/all -->
-      <img
-        src="{{isLocked ? 'assets/svg/MaterialSymbolsLock.svg' : 'assets/svg/MaterialSymbolsLockOpenOutline.svg'}}"
-        (click)="isLocked = !isLocked" alt="">
+    <small>Should be locked:</small>
+    <!-- See https://icones.js.org/collection/all -->
+    <img
+      src="{{value ? 'assets/svg/MaterialSymbolsLock.svg' : 'assets/svg/MaterialSymbolsLockOpenOutline.svg'}}"
+      (click)="value = !value" alt="">
   `,
   styles: [
     `
@@ -24,7 +24,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
   ]
 })
 export class LockInputComponent implements ControlValueAccessor{
-  isLocked = false;
+  value = false;
 
   registerOnChange(fn: any): void {
   }
@@ -32,6 +32,8 @@ export class LockInputComponent implements ControlValueAccessor{
   registerOnTouched(fn: any): void {
   }
 
-  writeValue(obj: any): void {
+  writeValue(obj: boolean): void {
+    console.log('writeValue: ' + obj);
+    this.value = obj;
   }
 }
