@@ -26,6 +26,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 export class LockInputComponent implements ControlValueAccessor{
   value = false;
   onChange!: (value: boolean) => void;
+  onTouched!: () => void;
 
   writeValue(obj: boolean): void {
     this.value = obj;
@@ -36,10 +37,12 @@ export class LockInputComponent implements ControlValueAccessor{
   }
 
   registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
   setValue() {
     this.value = !this.value;
     this.onChange(this.value);
+    this.onTouched();
   }
 }
