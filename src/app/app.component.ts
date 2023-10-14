@@ -19,9 +19,9 @@ import {LockInputComponent} from "../complex-form-control/lock-input/lock-input.
           Item Name
           <input id="itemName" formControlName="itemName" placeholder="Add Item">
         </label>
+        <app-lock-input formControlName="isLocked"></app-lock-input>
         <button type="submit" (click)="onSubmit()">Add Item</button>
       </form>
-      <app-lock-input></app-lock-input>
 
       <article class="black-background">{{formGroup.value | json}}</article>
     </main>
@@ -50,6 +50,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = this.fb.group({
       itemName: new FormControl(),
+      isLocked: new FormControl(),
     });
   }
 

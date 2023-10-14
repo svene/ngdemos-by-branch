@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
   selector: 'app-lock-input',
@@ -14,7 +15,23 @@ import { Component } from '@angular/core';
     `
     `
   ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: LockInputComponent,
+      multi: true,
+    }
+  ]
 })
-export class LockInputComponent {
+export class LockInputComponent implements ControlValueAccessor{
   isLocked = false;
+
+  registerOnChange(fn: any): void {
+  }
+
+  registerOnTouched(fn: any): void {
+  }
+
+  writeValue(obj: any): void {
+  }
 }
