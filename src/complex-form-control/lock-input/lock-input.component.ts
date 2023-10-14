@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'app-lock-input',
@@ -7,13 +8,20 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
   template: `
     <small>Should be locked:</small>
     <!-- See https://icones.js.org/collection/all -->
-    <img
-      src="{{value ? 'assets/svg/MaterialSymbolsLock.svg' : 'assets/svg/MaterialSymbolsLockOpenOutline.svg'}}"
-      (click)="setValue()" alt="">
+    <img [ngClass]="{'disabled-control': disabled}"
+         src="{{value ? 'assets/svg/MaterialSymbolsLock.svg' : 'assets/svg/MaterialSymbolsLockOpenOutline.svg'}}"
+         (click)="setValue()" alt="">
   `,
   styles: [
     `
+      .disabled-control {
+        opacity: 0.5;
+        pointer-events: none;
+      }
     `
+  ],
+  imports: [
+    NgClass
   ],
   providers: [
     {
@@ -25,6 +33,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 })
 export class LockInputComponent implements ControlValueAccessor{
   value = false;
+  disabled = false;
   onChange!: (value: boolean) => void;
   onTouched!: () => void;
 
@@ -40,9 +49,15 @@ export class LockInputComponent implements ControlValueAccessor{
     this.onTouched = fn;
   }
 
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
   setValue() {
-    this.value = !this.value;
-    this.onChange(this.value);
-    this.onTouched();
+    if (!this.disabled) {
+      this.value = !this.value;
+      this.onChange(this.value);
+      this.onTouched();
+    }
   }
 }

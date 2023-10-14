@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = this.fb.group({
       itemName: new FormControl(),
-      isLocked: new FormControl(true), // will call 'writeValue' on ControlValueAccessor
+      isLocked: new FormControl({value: false, disabled: false}), // will call 'writeValue' on ControlValueAccessor
     });
   }
 
