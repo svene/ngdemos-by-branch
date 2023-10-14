@@ -1,16 +1,29 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {JsonPipe} from "@angular/common";
+import {LockInputComponent} from "../complex-form-control/lock-input/lock-input.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   template: `
     <main class="container">
-      <h1>{{title}}</h1>
       <div class="grid">
-        <div><button class="app-button" type="button">A Button</button></div>
+        <h5>{{title}}</h5>
+        <div><a [href]="url" target="_blank"><img src="assets/svg/MdiYoutube.svg"></a></div>
       </div>
+      <hr>
 
-      <article class="black-background">An article</article>
+      <form [formGroup]="formGroup">
+        <label for="itemName">
+          Item Name
+          <input id="itemName" formControlName="itemName" placeholder="Add Item">
+        </label>
+        <button type="submit" (click)="onSubmit()">Add Item</button>
+      </form>
+      <app-lock-input></app-lock-input>
+
+      <article class="black-background">{{formGroup.value | json}}</article>
     </main>
 
   `,
@@ -21,7 +34,27 @@ import { Component } from '@angular/core';
       }
     `
   ],
+  imports: [
+    ReactiveFormsModule,
+    JsonPipe,
+    LockInputComponent
+  ]
 })
-export class AppComponent {
-  title = 'ngdemos-by-branch';
+export class AppComponent implements OnInit {
+  title = 'Control Value Accessor in Angular [Advanced, 2020]';
+  url = 'https://www.youtube.com/watch?v=OrmIfW8Ak3w';
+  formGroup!: FormGroup;
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.formGroup = this.fb.group({
+      itemName: new FormControl(),
+    });
+  }
+
+  onSubmit() {
+    console.log(this.formGroup.value);
+  }
+
 }
