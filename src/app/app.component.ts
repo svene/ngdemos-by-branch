@@ -20,7 +20,7 @@ import {LockInputComponent} from "../complex-form-control/lock-input/lock-input.
           <input id="itemName" formControlName="itemName" placeholder="Add Item">
         </label>
         <app-lock-input formControlName="isLocked"></app-lock-input>
-        <button type="submit" (click)="onSubmit()">Add Item</button>
+        <button [disabled]="!formGroup.touched" type="submit" (click)="onSubmit()">Add Item</button>
       </form>
 
       <article class="black-background">{{formGroup.value | json}}</article>
